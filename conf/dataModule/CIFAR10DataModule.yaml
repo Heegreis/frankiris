@@ -1,0 +1,4 @@
+# @package _group_
+_target_: src.dataModule.CIFAR10DataModule.CIFAR10DataModule
+
+data_dir: 'dataset'

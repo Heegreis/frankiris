@@ -1,0 +1,4 @@
+defaults:
+  - dataModule: CIFAR10DataModule
+  - module: TorchExample
+  - trainer: default_trainer
