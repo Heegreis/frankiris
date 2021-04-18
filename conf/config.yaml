@@ -1,4 +1,6 @@
 defaults:
   - dataModule: CIFAR10DataModule
   - module: TorchExample
+  - logger: tensorboard
+  # - logger: multiple
   - trainer: default_trainer

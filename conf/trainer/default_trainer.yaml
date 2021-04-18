@@ -1,5 +1,4 @@
-# @package _group_
 _target_: pytorch_lightning.Trainer
 
 gpus: 1 # number of gpus to train on (int) or which GPUs to train on (list or str) applied per node, 0 is train on cpu
-max_epochs: 1
+fast_dev_run: True
