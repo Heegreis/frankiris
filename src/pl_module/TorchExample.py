@@ -2,7 +2,8 @@ import torch.optim as optim
 import torch.nn.functional as F
 import pytorch_lightning as pl
 from src.torch_module.TorchExample import Net
-
+from pytorch_lightning.metrics.functional import accuracy
+import torch
 
 class TorchExample(pl.LightningModule):
 
@@ -20,6 +21,20 @@ class TorchExample(pl.LightningModule):
         x, y = batch
         loss = F.cross_entropy(self(x), y)
         self.log('train_loss', loss)
+        return loss
+
+    def validation_step(self, batch, batch_idx):
+        x, y = batch
+        outputs = self(x)
+        loss = F.cross_entropy(outputs, y)
+
+        preds = torch.argmax(outputs, dim=1)
+        acc = accuracy(preds, y)
+
+        # Calling self.log will surface up scalars for you in TensorBoard
+        self.log('val_loss', loss, prog_bar=True)
+        self.log('val_acc', acc, prog_bar=True)
+
         return loss
 
     def configure_optimizers(self):
