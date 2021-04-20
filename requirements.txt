@@ -1,5 +1,6 @@
 # python=3.7
 # --------- hydra --------- #
-hydra-core==1.0.6
+# pip install hydra-core --upgrade --pre
+hydra-core==1.1.0.dev5
 pytorch-lightning==1.2.5
 torchvision==0.9.1
