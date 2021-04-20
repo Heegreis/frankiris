@@ -11,10 +11,15 @@ def train(cfg):
     # Init Lightning loggers
     if "logger" in cfg:
         logger = []
-        for _, loggerCfg in cfg.logger.items():
-            logger.append(hydra.utils.instantiate(loggerCfg))
-            print(logger[0])
+        for _, logger_cfg in cfg.logger.items():
+            logger.append(hydra.utils.instantiate(logger_cfg))
     
-    # init trainer
-    trainer = hydra.utils.instantiate(cfg.trainer, logger=logger)
+    # Init Lightning callbacks
+    if "callbacks" in cfg:
+        callbacks = []
+        for _, callbacks_cfg in cfg.callbacks.items():
+            callbacks.append(hydra.utils.instantiate(callbacks_cfg))
+
+    # Init Lightning trainer
+    trainer = hydra.utils.instantiate(cfg.trainer, logger=logger, callbacks=callbacks)
     trainer.fit(module, dataModule)

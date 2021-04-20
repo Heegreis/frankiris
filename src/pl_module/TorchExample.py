@@ -37,6 +37,10 @@ class TorchExample(pl.LightningModule):
 
         return loss
 
+    def test_step(self, batch, batch_idx):
+        # Here we just reuse the validation_step for testing
+        return self.validation_step(batch, batch_idx)
+
     def configure_optimizers(self):
         optimizer = optim.SGD(self.parameters(), lr=0.001, momentum=0.9)
         return optimizer
