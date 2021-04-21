@@ -1,4 +1,5 @@
 defaults:
+  - transforms: default_transforms
   - dataModule: CIFAR10DataModule
   - module: TorchExample
   - logger: tensorboard
