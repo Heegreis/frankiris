@@ -1,16 +1,20 @@
 import hydra
+from src.utils.cfgfix import fix_tuple
 
 
 def train(cfg):
     # Init torch transforms for datamodule
     train_transforms = []
     for transform_cfg in cfg.transforms.train_transforms:
+        fix_tuple(transform_cfg)
         train_transforms.append(hydra.utils.instantiate(transform_cfg))
     val_transforms = []
     for transform_cfg in cfg.transforms.val_transforms:
+        fix_tuple(transform_cfg)
         val_transforms.append(hydra.utils.instantiate(transform_cfg))
     test_transforms = []
     for transform_cfg in cfg.transforms.test_transforms:
+        fix_tuple(transform_cfg)
         test_transforms.append(hydra.utils.instantiate(transform_cfg))
 
     # Init Lightning datamodule
