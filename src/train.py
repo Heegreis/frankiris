@@ -1,26 +1,18 @@
 import hydra
-from src.utils.cfgfix import fix_tuple
+from src.utils.composeTransform import getTransform
 
 
 def train(cfg):
     # Init torch transforms for datamodule
-    train_transforms = []
-    for transform_cfg in cfg.transforms.train_transforms:
-        fix_tuple(transform_cfg)
-        train_transforms.append(hydra.utils.instantiate(transform_cfg))
-    val_transforms = []
-    for transform_cfg in cfg.transforms.val_transforms:
-        fix_tuple(transform_cfg)
-        val_transforms.append(hydra.utils.instantiate(transform_cfg))
-    test_transforms = []
-    for transform_cfg in cfg.transforms.test_transforms:
-        fix_tuple(transform_cfg)
-        test_transforms.append(hydra.utils.instantiate(transform_cfg))
+    if "transforms" in cfg:
+        transform = getTransform(cfg)
+    else:
+        transform = None
 
     # Init Lightning datamodule
-    dataModule = hydra.utils.instantiate(cfg.dataModule, train_transforms=train_transforms, val_transforms=val_transforms, test_transforms=test_transforms)
+    dataModule = hydra.utils.instantiate(cfg.dataModule, transform=transform)
 
-    # Init Lightning model
+    # # Init Lightning model
     module = hydra.utils.instantiate(cfg.module)
 
     # Init Lightning loggers

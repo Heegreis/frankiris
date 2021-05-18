@@ -1,0 +1,14 @@
+train:
+  - _target_: torchaudio.transforms.Resample
+    orig_freq: 16000
+    new_freq: 8000
+
+val:
+  - _target_: torchaudio.transforms.Resample
+    orig_freq: 16000
+    new_freq: 8000
+
+test:
+  - _target_: torchaudio.transforms.Resample
+    orig_freq: 16000
+    new_freq: 8000
