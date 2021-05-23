@@ -1,0 +1,8 @@
+defaults:
+  - transforms: audio
+  - dataModule: SPEECHCOMMANDS
+  - module: M5
+  - logger: tensorboard
+  # - logger: multiple
+  - callbacks: default
+  - trainer: default

@@ -1,8 +1,0 @@
-defaults:
-  - transforms: default_transforms
-  - dataModule: CIFAR10DataModule
-  - module: TorchExample
-  - logger: tensorboard
-  # - logger: multiple
-  - callbacks: default_callbacks
-  - trainer: default_trainer

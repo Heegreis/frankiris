@@ -1,0 +1,7 @@
+defaults:
+  - transforms: torchExample
+  - dataModule: ImageFolder
+  - module: TorchExample
+  - logger: tensorboard
+  - callbacks: default
+  - trainer: default
