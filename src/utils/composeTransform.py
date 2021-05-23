@@ -13,7 +13,7 @@ def instanceTransform(transform_cfg):
         if key == '_target_':
           target = value
         else:
-            p = p + key + '=' + value + ','
+            p = p + key + '=' + str(value) + ','
     p = p[:-1]
     cmd = eval(target + '(' + p + ')')
     return cmd
