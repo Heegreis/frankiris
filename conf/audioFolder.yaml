@@ -1,6 +1,6 @@
 defaults:
   - transforms: audio
-  - dataModule: SPEECHCOMMANDS
+  - dataModule: AudioFolder
   - module: M5
   - logger: tensorboard
   - callbacks: default

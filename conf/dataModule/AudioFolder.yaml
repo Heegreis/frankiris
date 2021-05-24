@@ -1,0 +1,8 @@
+_target_: src.dataModule.AudioFolder.AudioFolderDataModule
+
+train: ${hydra:runtime.cwd}/dataset/SpeechCommands/speech_commands_v0.02
+val: ${hydra:runtime.cwd}/dataset/SpeechCommands/speech_commands_v0.02
+test: ${hydra:runtime.cwd}/dataset/SpeechCommands/speech_commands_v0.02
+
+defaults:
+  - dataloader: default
