@@ -1,3 +1,6 @@
 _target_: src.dataModule.SPEECHCOMMANDSDataModule.SPEECHCOMMANDSDataModule
 
 data_dir: ${hydra:runtime.cwd}/dataset
+
+defaults:
+  - dataloader: default

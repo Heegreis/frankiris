@@ -3,10 +3,9 @@ from torch import Tensor
 import torchaudio
 from torchaudio.datasets import SPEECHCOMMANDS
 from torchaudio.datasets.speechcommands import load_speechcommands_item
-from torch.utils.data import DataLoader
 import torch
 import pytorch_lightning as pl
-import os
+import hydra
 
 
 class SPEECHCOMMANDS(SPEECHCOMMANDS):
@@ -29,12 +28,12 @@ class SPEECHCOMMANDS(SPEECHCOMMANDS):
         return new_waveform, sample_rate, label, speaker_id, utterance_number
 
 class SPEECHCOMMANDSDataModule(pl.LightningDataModule):
-    def __init__(self, data_dir: str, transform=None, batch_size: int = 32, download=True):
+    def __init__(self, data_dir: str, transform=None, download=True, dataloader=None):
         super().__init__()
         self.transform = transform
         self.data_dir = data_dir
-        self.batch_size = batch_size
         self.download = download
+        self.dataloader = dataloader
 
     def setup(self, stage=None):
         self.train = SPEECHCOMMANDS(self.data_dir, download=self.download, subset="training", transform=self.transform['train'])
@@ -72,10 +71,10 @@ class SPEECHCOMMANDSDataModule(pl.LightningDataModule):
         return tensors, targets
 
     def train_dataloader(self):
-        return DataLoader(self.train, batch_size=self.batch_size, shuffle=True, collate_fn=self.collate_fn)
+        return hydra.utils.instantiate(self.dataloader['train'], self.train, collate_fn=self.collate_fn)
 
     def val_dataloader(self):
-        return DataLoader(self.val, batch_size=self.batch_size, collate_fn=self.collate_fn)
+        return hydra.utils.instantiate(self.dataloader['val'], self.val, collate_fn=self.collate_fn)
 
     def test_dataloader(self):
-        return DataLoader(self.test, batch_size=self.batch_size, collate_fn=self.collate_fn)
+        return hydra.utils.instantiate(self.dataloader['test'], self.test, collate_fn=self.collate_fn)

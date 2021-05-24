@@ -1,0 +1,12 @@
+train:
+  _target_: torch.utils.data.DataLoader
+  batch_size: 32
+  shuffle: True
+
+val:
+  _target_: torch.utils.data.DataLoader
+  batch_size: 32
+
+test:
+  _target_: torch.utils.data.DataLoader
+  batch_size: 32

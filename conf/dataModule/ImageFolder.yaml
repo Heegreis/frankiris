@@ -1,5 +1,8 @@
 _target_: src.dataModule.ImageFolder.ImageFolderDataModule
 
-train: ${hydra:runtime.cwd}/dataset/kagglecatsanddogs_3367a/PetImages
-val: ${hydra:runtime.cwd}/dataset/kagglecatsanddogs_3367a/PetImages
-test: ${hydra:runtime.cwd}/dataset/kagglecatsanddogs_3367a/PetImages
+train: ${hydra:runtime.cwd}/dataset/kagglecatsanddogs/PetImages
+val: ${hydra:runtime.cwd}/dataset/kagglecatsanddogs/PetImages
+test: ${hydra:runtime.cwd}/dataset/kagglecatsanddogs/PetImages
+
+defaults:
+  - dataloader: default

@@ -10,7 +10,7 @@ def train(cfg):
         transform = None
 
     # Init Lightning datamodule
-    dataModule = hydra.utils.instantiate(cfg['dataModule'], transform=transform)
+    dataModule = hydra.utils.instantiate(cfg['dataModule'], transform=transform, _recursive_=False)
 
     # # Init Lightning model
     module = hydra.utils.instantiate(cfg['module'])

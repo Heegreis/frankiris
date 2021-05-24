@@ -1,3 +1,6 @@
 _target_: src.dataModule.CIFAR10DataModule.CIFAR10DataModule
 
 data_dir: ${hydra:runtime.cwd}/dataset
+
+defaults:
+  - dataloader: default
