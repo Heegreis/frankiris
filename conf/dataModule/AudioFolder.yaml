@@ -5,4 +5,4 @@ val: ${hydra:runtime.cwd}/dataset/SpeechCommands/speech_commands_v0.02
 test: ${hydra:runtime.cwd}/dataset/SpeechCommands/speech_commands_v0.02
 
 defaults:
-  - dataloader: default
+  - dataloader: audioFolder_h5
