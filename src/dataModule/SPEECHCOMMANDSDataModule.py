@@ -8,7 +8,7 @@ import pytorch_lightning as pl
 import hydra
 
 
-class SPEECHCOMMANDS(SPEECHCOMMANDS):
+class SPEECHCOMMANDSwithTransform(SPEECHCOMMANDS):
     def __init__(self, root, download = False, subset = None, transform = None):
         super().__init__(root, download=download, subset=subset)
         self.transform = transform
@@ -36,9 +36,9 @@ class SPEECHCOMMANDSDataModule(pl.LightningDataModule):
         self.dataloader = dataloader
 
     def setup(self, stage=None):
-        self.train = SPEECHCOMMANDS(self.data_dir, download=self.download, subset="training", transform=self.transform['train'])
-        self.val = SPEECHCOMMANDS(self.data_dir, download=self.download, subset="validation", transform=self.transform['val'])
-        self.test = SPEECHCOMMANDS(self.data_dir, download=self.download, subset="testing", transform=self.transform['test'])
+        self.train = SPEECHCOMMANDSwithTransform(self.data_dir, download=self.download, subset="training", transform=self.transform['train'])
+        self.val = SPEECHCOMMANDSwithTransform(self.data_dir, download=self.download, subset="validation", transform=self.transform['val'])
+        self.test = SPEECHCOMMANDSwithTransform(self.data_dir, download=self.download, subset="testing", transform=self.transform['test'])
 
         self.labels = sorted(list(set(datapoint[2] for datapoint in self.train)))
 
