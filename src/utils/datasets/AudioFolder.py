@@ -68,6 +68,8 @@ class AudioFolder(DatasetFolder):
         waveform, sample_rate = torchaudio.load(path)
         if self.transform is not None:
             sample = self.transform(waveform)
+        else:
+            sample = waveform
         # if self.target_transform is not None:
         #     target = self.target_transform(target)
 

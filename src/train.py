@@ -4,10 +4,7 @@ from src.utils.composeTransform import getTransform
 
 def train(cfg):
     # Init torch transforms for datamodule
-    if "transforms" in cfg:
-        transform = getTransform(cfg)
-    else:
-        transform = None
+    transform = getTransform(cfg)
 
     # Init Lightning datamodule
     dataModule = hydra.utils.instantiate(cfg['dataModule'], transform=transform, _recursive_=False)
