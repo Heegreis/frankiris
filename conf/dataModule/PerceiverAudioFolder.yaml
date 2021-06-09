@@ -1,0 +1,17 @@
+_target_: src.dataModule.PerceiverAudioFolder.PerceiverAudioFolderDataModule
+
+train: ${hydra:runtime.cwd}/dataset/SpeechCommands/speech_commands_v0.02
+val: ${hydra:runtime.cwd}/dataset/SpeechCommands/speech_commands_v0.02
+test: ${hydra:runtime.cwd}/dataset/SpeechCommands/speech_commands_v0.02
+
+audio_cfg:
+  clip_length: 1.0
+  sample_rate: 16000
+  hop_length: 160
+  n_fft: 400
+  n_mels: 64
+  f_min: 0
+  f_max: 8000
+
+defaults:
+  - dataloader: default

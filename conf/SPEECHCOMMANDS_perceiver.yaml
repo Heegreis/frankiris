@@ -1,0 +1,35 @@
+defaults:
+  # - transforms: perceiver_audio
+  - dataModule: PerceiverAudioFolder
+  - module: PerceiverAudio
+  - logger: tensorboard
+  # - callbacks: default
+  - trainer: default
+
+dataModule:
+  train: ${hydra:runtime.cwd}/dataset/SpeechCommands/speech_commands_v0.02_train
+  val: ${hydra:runtime.cwd}/dataset/SpeechCommands/speech_commands_v0.02_val
+  test: ${hydra:runtime.cwd}/dataset/SpeechCommands/speech_commands_v0.02_test
+
+  dataloader:
+    train:
+      batch_size: 16
+      pin_memory: True
+    val:
+      batch_size: 16
+      pin_memory: True
+    test:
+      batch_size: 16
+      pin_memory: True
+    collate_fn:
+
+module:
+  torch_module:
+    input_channels: 64
+    input_axis: 1
+    num_classes: 35
+    weight_tie_layers: True
+
+trainer:
+  fast_dev_run: False
+  benchmark: True

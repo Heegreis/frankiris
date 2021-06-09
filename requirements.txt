@@ -8,3 +8,9 @@ clearml==0.17.5
 # audio
 pydub==0.25.1
 torchaudio==0.8.1
+# optional
+## https://github.com/lucidrains/perceiver-pytorch
+perceiver-pytorch==0.4.0
+### https://colab.research.google.com/github/daisukelab/sound-clf-pytorch/blob/master/advanced/Perceiver_MelSpecAudio_Example_Colab.ipynb
+sklearn
+dl-cliche==0.1.12

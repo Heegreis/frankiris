@@ -1,0 +1,45 @@
+defaults:
+  # - transforms: perceiver_audio
+  - dataModule: PerceiverAudioFolder
+  - module: PerceiverAudio
+  - logger: tensorboard
+  # - callbacks: default
+  - trainer: default
+
+dataModule:
+  train: ${hydra:runtime.cwd}/dataset/Tomofun_dog_sound_20210513_random_seed_0/train
+  val: ${hydra:runtime.cwd}/dataset/Tomofun_dog_sound_20210513_random_seed_0/val
+  test: ${hydra:runtime.cwd}/dataset/Tomofun_dog_sound_20210513_random_seed_0/test
+
+  audio_cfg:
+    clip_length: 5.0
+    sample_rate: 8000
+
+  dataloader:
+    train:
+      batch_size: 16
+      pin_memory: True
+      num_workers: 16
+    val:
+      batch_size: 16
+      pin_memory: True
+      num_workers: 16
+    test:
+      batch_size: 16
+      pin_memory: True
+      num_workers: 16
+    collate_fn:
+
+module:
+  torch_module:
+    input_channels: 64
+    input_axis: 1
+    num_classes: 6
+    weight_tie_layers: True
+
+trainer:
+  fast_dev_run: False
+  benchmark: True
+
+mode: inference
+# mode: test

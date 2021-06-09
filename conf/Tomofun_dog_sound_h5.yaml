@@ -1,0 +1,15 @@
+defaults:
+  # - transforms: audio
+  - dataModule: AudioFolder
+  - module: M5
+  - logger: tensorboard
+  - callbacks: default
+  - trainer: default
+
+dataModule:
+  train: ${hydra:runtime.cwd}/dataset/Tomofun_dog_sound_20210513_random_seed_0/train
+  val: ${hydra:runtime.cwd}/dataset/Tomofun_dog_sound_20210513_random_seed_0/val
+  test: ${hydra:runtime.cwd}/dataset/Tomofun_dog_sound_20210513_random_seed_0/test
+
+trainer:
+  fast_dev_run: False

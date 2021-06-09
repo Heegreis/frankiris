@@ -5,9 +5,6 @@ from src.torch_module.M5 import M5 as Net
 from pytorch_lightning.metrics.functional import accuracy
 import torch
 
-import sys
- 
-# sys.setrecursionlimit(1000000)
 
 class M5(pl.LightningModule):
     def __init__(self):

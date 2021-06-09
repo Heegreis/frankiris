@@ -1,27 +1,28 @@
-from src.utils.datasets import AudioFolder
+from src.utils.datasets.PerceiverAudioFolder import PerceiverAudioFolder
 from src.utils.collate_fn import *
 import pytorch_lightning as pl
 import hydra
 import torch
 
 
-class AudioFolderDataModule(pl.LightningDataModule):
-    def __init__(self, train: str = None, val: str = None, test: str = None, transform=None, dataloader=None):
+class PerceiverAudioFolderDataModule(pl.LightningDataModule):
+    def __init__(self, train: str = None, val: str = None, test: str = None, transform=None, dataloader=None, audio_cfg=None):
         super().__init__()
         self.train = train
         self.val = val
         self.test = test
         self.transform = transform
         self.dataloader = dataloader
+        self.audio_cfg = audio_cfg
         self.set_collate_fn()
 
     def setup(self, stage=None):
         if self.train is not None:
-            self.train = AudioFolder(self.train, self.transform['train']['audio'])
+            self.train = PerceiverAudioFolder(self.train, transform=self.transform['train']['audio'], audio_cfg=self.audio_cfg)
         if self.val is not None:
-            self.val = AudioFolder(self.val, self.transform['val']['audio'])
+            self.val = PerceiverAudioFolder(self.val, transform=self.transform['val']['audio'], audio_cfg=self.audio_cfg)
         if self.test is not None:
-            self.test = AudioFolder(self.test, self.transform['test']['audio'])
+            self.test = PerceiverAudioFolder(self.test, transform=self.transform['test']['audio'], audio_cfg=self.audio_cfg)
 
     def set_collate_fn(self):
         self.collate_fn = None
