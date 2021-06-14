@@ -54,7 +54,7 @@ def train(cfg):
                 tt = 0
                 stime = time.time()
                 for file in sorted(root.iterdir()):
-                    waveform, sample_rate = torchaudio.load(file)
+                    waveform, sample_rate = torchaudio.load(str(file))
                     log_mel_spec = (dataModule.train.to_mel_spectrogram(waveform) + torch.finfo(torch.float).eps).log()
                     x = torch.Tensor(log_mel_spec).to('cuda:0')
                     # x = torch.Tensor(log_mel_spec)
@@ -81,8 +81,10 @@ def train(cfg):
             module.load_state_dict(checkpoint['state_dict'])
             module.to('cuda:0')
             module.eval()
+            module.test()
             root = Path(hydra.utils.get_original_cwd() + '/dataset/Tomofun_dog_sound_20210513_random_seed_0/train')
             print(dataModule.train.class_to_idx)
+
             # for class_dir in root.iterdir():
             #     class_name = class_dir.name
             #     for file in class_dir.iterdir():

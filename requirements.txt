@@ -1,8 +1,8 @@
 # python=3.7
 # --------- hydra --------- #
 # pip install hydra-core --upgrade --pre
-hydra-core==1.1.0.dev5
-pytorch-lightning==1.2.5
+hydra-core==1.1.0
+pytorch-lightning==1.3.5
 torchvision==0.9.1
 clearml==0.17.5
 # audio
